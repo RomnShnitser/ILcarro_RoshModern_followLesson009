@@ -9,6 +9,8 @@ public class ApplicationManager {
 	//===========================================================================================
 	WebDriver driver;
 	HelperUser user;
+	HelperCar car;
+
 
 	/*#########################################################################################*/
 	public void initialization () {
@@ -18,6 +20,7 @@ public class ApplicationManager {
 		//- - - - - - - - - - - - - - - - - - - - - - -
 		driver = new ChromeDriver();
 		user = new HelperUser(driver);
+		car = new HelperCar(driver);
 
 		//- - - - - - - - - - - - - - - - - - - - - - -
 		driver.manage().window().maximize();
@@ -31,8 +34,11 @@ public class ApplicationManager {
 	}
 
 	//===========================================================================================
-
 	public HelperUser user () {
 		return user;
+	}
+
+	public HelperCar car () {
+		return car;
 	}
 }

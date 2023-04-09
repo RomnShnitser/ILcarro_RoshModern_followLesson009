@@ -3,8 +3,13 @@ package manager;
 import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HelperUser extends HelperBase {
+import java.time.Duration;
+
+public class HelperUser extends Helper_Base {
 	//- - - - - - - - - - - - - - - - - - - - - - -
 	public HelperUser (WebDriver driver) {
 		super(driver);
@@ -16,6 +21,13 @@ public class HelperUser extends HelperBase {
 
 	public void logout () {
 		mouseClick(By.xpath("//a[normalize-space()='Logout']"));
+	}
+
+	public boolean isLoggedSuccess() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebElement element = driver.findElement(By.cssSelector(".dialog-container"));
+		wait.until(ExpectedConditions.visibilityOf(element));
+		return element.getText().contains("success");
 	}
 
 	public void openLoginForm () {
@@ -38,5 +50,13 @@ public class HelperUser extends HelperBase {
 	public void fillLoginForm (User userData) {
 		type(By.xpath("//input[@id='email']"), userData.getEmail());
 		type(By.xpath("//input[@id='password']"), userData.getPassword());
+	}
+
+	public void login (User user) {
+		openLoginForm();
+		fillLoginForm(user);
+		submitLogin();
+		pauseThreadSleep(2000);
+		clickOkButtonOnLogin();
 	}
 }

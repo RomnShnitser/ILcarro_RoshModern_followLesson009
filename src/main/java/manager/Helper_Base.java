@@ -4,13 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class HelperBase {
+public class Helper_Base {
 	//===========================================================================================
 	WebDriver driver;
 
 
 	//Constructor
-	public HelperBase (WebDriver driver) {
+	public Helper_Base (WebDriver driver) {
 		this.driver = driver;
 	}
 
